@@ -13,7 +13,7 @@ const ERR = {
     "Github Username was found to be undefined. Please set all relevant environment variables.",
   requestFailed:
     "The request to GitHub didn't succeed. Check if GitHub token in your .env file is correct.",
-  requestFailedMedium:
+requestMediumFailed:
     "The request to Medium didn't succeed. Check if Medium username in your .env file is correct."
 };
 if (USE_GITHUB_DATA === "true") {
@@ -108,7 +108,8 @@ if (MEDIUM_USERNAME !== undefined) {
 
     console.log(`statusCode: ${res.statusCode}`);
     if (res.statusCode !== 200) {
-      throw new Error(ERR.requestMediumFailed);
+    console.log('Medium API request failed with status code:', res.statusCode);
+    console.log('Please check the Medium username and API availability.');
     }
 
     res.on("data", d => {
